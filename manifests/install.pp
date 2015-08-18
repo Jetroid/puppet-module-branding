@@ -28,16 +28,10 @@ class branding::install (
   }
 
   # Set the desktop background.
-  file{"/usr/share/backgrounds/warty-final-ubuntu.png":
+  file{"${desktop_destination}":
     ensure => $ensure,
     source => "${desktop_filepath_source}",
-  }
-
-  # Ensure our background is the only one that can be selected.
-  file{"/usr/share/gnome-background-properties/":
-    ensure => directory,
-    source => "puppet:///modules/branding/emptydir",
-  }
+  } ->
 
   # Set the login background.
   
@@ -46,6 +40,7 @@ class branding::install (
     source => "${login_filepath_source}",
   } ->
 
+  # Add these to dconf.
   file{'/etc/dconf/db/local.d/branding.keys':
     ensure => $ensure,
     content => template('branding/branding.keys.erb'),

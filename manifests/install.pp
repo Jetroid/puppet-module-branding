@@ -30,6 +30,16 @@ class branding::install (
   file{'/etc/dconf/db/local.d/locks/branding.locks':
     ensure => $ensure,
     source => 'puppet:///modules/branding/branding.locks',
+  } -> 
+
+  # Do a dconf update to propagate
+  exec{'dconf-update':
+    command => '/usr/bin/dconf update',
+      subscribe => [
+        File['/etc/dconf/db/local.d/branding.keys'],
+        File['/etc/dconf/db/local.d/locks/branding.locks'],
+      ],
+    refreshonly => true,
   }
 
   # Set the login background.

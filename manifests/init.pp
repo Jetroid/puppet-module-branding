@@ -5,9 +5,9 @@
 class branding(
   $ensure                  = $branding::params::ensure,
   $desktop_filepath_source = $branding::params::desktop_filepath_source,
-  $desktop_filepath_dest   = $branding::params::desktop_filepath_dest,
+  $desktop_dirpath_dest   = $branding::params::desktop_dirpath_dest,
   $login_filepath_source   = $branding::params::login_filepath_source,
-  $login_filepath_dest     = $branding::params::login_filepath_dest,
+  $login_dirpath_dest     = $branding::params::login_dirpath_dest,
 
 ) inherits branding::params {
 

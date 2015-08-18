@@ -1,32 +1,37 @@
 class branding::install (
-  $ensure                           = $branding::ensure,
-  $background_filepath_puppet       = $branding::background_filepath_puppet,
-  $background_filepath_agent        = $branding::background_filepath_agent,
-  $login_background_filepath_puppet = $branding::login_background_filepath_puppet,
-  $login_background_filepath_agent  = $branding::login_background_filepath_agent,
+  $ensure                  = $branding::ensure,
+  $desktop_filepath_source = $branding::desktop_filepath_source,
+  $desktop_dirpath_dest    = $branding::desktop_dirpath_dest,
+  $login_filepath_source   = $branding::login_filepath_source,
+  $login_dirpath_dest      = $branding::login_dirpath_dest,
 
 ) {
 
+  $desktop_destination = make_dest_path($desktop_filepath_source, $desktop_dirpath_dest)
+  $login_destination = make_dest_path($login_filepath_source, $login_dirpath_dest)
+
+  require Class['dconf_profile']
+  
   # Set the desktop background.
-  file{"${background_filepath_agent}":
+  file{"${desktop_destination}":
     ensure => $ensure,
-    source => "${background_filepath_puppet}",
+    source => "${desktop_filepath_source}",
   } -> 
   
   file{'/etc/dconf/db/local.d/branding.keys':
-    ensure => present,
+    ensure => $ensure,
     content => template('branding/branding.keys.erb'),
   } ->
 
   file{'/etc/dconf/db/local.d/locks/branding.locks':
-    ensure => present,
+    ensure => $ensure,
     source => 'puppet:///modules/branding/branding.locks',
   }
 
   # Set the login background.
-  file{"{$login_background_filepath_agent}":
+  file{"{$login_destination}":
     ensure => $ensure,
-    source => "${login_background_filepath_puppet}",
+    source => "${login_filepath_source}",
   }
 
 }

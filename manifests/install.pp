@@ -28,14 +28,15 @@ class branding::install (
   }
 
   # Set the desktop background.
-  file{"${desktop_destination}":
+  file{"/usr/share/backgrounds/warty-final-ubuntu.png":
     ensure => $ensure,
     source => "${desktop_filepath_source}",
-  } ->
+  }
 
-  file{"/usr/share/gnome-background-properties/ubuntu-wallpapers.xml":
-    ensure => $ensure,
-    content => template('branding/ubuntu-wallpapers.xml.erb'),
+  # Ensure our background is the only one that can be selected.
+  file{"/usr/share/gnome-background-properties/":
+    ensure => directory,
+    source => "puppet:///modules/branding/emptydir",
   }
 
   # Set the login background.

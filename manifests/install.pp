@@ -33,13 +33,25 @@ class branding::install (
   }
 
   # Set the login background.
-  file{"${login_dirpath_dest}":
-    ensure => directory,
-  } ->
+  #The if is annoying by necessary to ensure that when
+  #the two are to be saved in the same directory
+  #that the directory resource is not declared twice.
+  if $desktop_dirpath_dest != $login_dirpath_dest {
+    file{"${login_dirpath_dest}":
+      ensure => directory,
+    } ->
 
-  file{"${login_destination}":
-    ensure => $ensure,
-    source => "${login_filepath_source}",
-  }
+    file{"${login_destination}":
+      ensure => $ensure,
+      source => "${login_filepath_source}",
+    }
+  }else{
+    file{"${login_destination}":
+      ensure => $ensure,
+      source => "${login_filepath_source}",
+    }
+  } 
+
+  
 
 }

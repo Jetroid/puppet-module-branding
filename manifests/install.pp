@@ -13,6 +13,10 @@ class branding::install (
   require Class['dconf_profile']
   
   # Set the desktop background.
+  file{"${desktop_dirpath_dest}":
+    ensure => directory,
+  } ->
+
   file{"${desktop_destination}":
     ensure => $ensure,
     source => "${desktop_filepath_source}",
@@ -29,6 +33,10 @@ class branding::install (
   }
 
   # Set the login background.
+  file{"${login_dirpath_dest}":
+    ensure => directory,
+  } ->
+
   file{"${login_destination}":
     ensure => $ensure,
     source => "${login_filepath_source}",

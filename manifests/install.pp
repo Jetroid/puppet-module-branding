@@ -27,10 +27,16 @@ class branding::install (
     }
   }
 
+  # Set the desktop background.
   file{"${desktop_destination}":
     ensure => $ensure,
     source => "${desktop_filepath_source}",
-  } 
+  } ->
+
+  file{"/usr/share/gnome-background-properties/ubuntu-wallpapers.xml":
+    ensure => $ensure,
+    content => template('branding/ubuntu-wallpapers.xml.erb'),
+  }
 
   # Set the login background.
   

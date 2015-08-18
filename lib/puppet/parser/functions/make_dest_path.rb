@@ -1,5 +1,5 @@
 module Puppet::Parser::Functions
-  newfunction(:make_dest_path) do |args|
+  newfunction(:make_dest_path, :type => :rvalue) do |args|
     source_filepath = args[0]
     dest_dirpath = args[1]
     # Split to get filename.

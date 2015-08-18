@@ -3,7 +3,7 @@ module Puppet::Parser::Functions
     source_filepath = args[0]
     dest_dirpath = args[1]
     # Split to get filename.
-    filename = sourcefilepath.split("/").last
+    filename = source_filepath.split("/").last
     # If last character of destination_dirpath not a slash, then add one.
     dest_dirpath = dest_dirpath[-1,1] == "/" ? dest_dirpath : dest_dirpath + "/"
     #Append filename.

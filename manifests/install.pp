@@ -29,7 +29,7 @@ class branding::install (
   }
 
   # Set the login background.
-  file{"{$login_destination}":
+  file{"${login_destination}":
     ensure => $ensure,
     source => "${login_filepath_source}",
   }

@@ -1,3 +1,5 @@
+#       This file is being maintained by Puppet.
+# 	DO NOT EDIT
 /com/canonical/unity-greeter/background
 /org/gnome/desktop/background/picture-uri
 ~                                   

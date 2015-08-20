@@ -34,7 +34,6 @@ class branding::install (
   } ->
 
   # Set the login background.
-  
   file{"${login_destination}":
     ensure => $ensure,
     source => "${login_filepath_source}",
@@ -54,7 +53,7 @@ class branding::install (
   require dconf_profile 
 
   # Do a dconf update to propagate
-  exec{'dconf-update':
+  exec{'dconf-update-branding':
     command => '/usr/bin/dconf update',
       subscribe => [
         File['/etc/dconf/db/local.d/branding.keys'],

@@ -4,6 +4,9 @@ class branding::install (
   $desktop_dirpath_dest    = $branding::desktop_dirpath_dest,
   $login_filepath_source   = $branding::login_filepath_source,
   $login_dirpath_dest      = $branding::login_dirpath_dest,
+  $blank_screen            = $branding::blank_screen,
+  $draw_user_backgrounds   = $branding::draw_user_backgrounds,
+  $draw_grid               = $branding::draw_grid,
 
 ) {
 

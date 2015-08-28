@@ -6,7 +6,7 @@ background-color='#000000'
 draw-user-backgrounds=<%= scope.lookupvar('draw_user_backgrounds') %>
 draw-grid=<%= scope.lookupvar('draw_grid') %>
 <% blank_screen = scope.lookupvar('blank_screen') -%>
-idle-timeout=<% if blank_screen -%>300<% else -%>0<% end -%>
+idle-timeout=<% if blank_screen -%>300<% else -%>0<% end %>
 [org/gnome/desktop/background]
 picture-uri='file://<%= scope.lookupvar('desktop_destination') %>'
 [org/gnome/desktop/screensaver]
